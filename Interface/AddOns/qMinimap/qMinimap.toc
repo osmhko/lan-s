@@ -1,0 +1,9 @@
+﻿## Interface: 40300
+## Title: q|cFF00A2FFMinimap|r
+## Title-zhTW: q|cFF00A2FFMinimap|r
+## Notes: Minimap
+## Notes-zhTW: Minimap
+## Author: Qulight
+## Version: 1.0
+
+qMinimap.lua

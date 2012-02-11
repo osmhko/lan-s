@@ -1,0 +1,6 @@
+## Interface: 40300
+## Title: SYNP
+
+## OptionalDeps: Beauty
+core.lua
+nameplates.lua

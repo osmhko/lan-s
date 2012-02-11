@@ -1,0 +1,7 @@
+﻿## Interface: 40300
+## Title: |cffff00ffR|reminder
+## Title-zhTW: |cffff00ffR|reminder
+## Notes: reminder
+## Notes-zhTW: reminder
+
+Reminder.lua

@@ -1,0 +1,27 @@
+local F, _ = unpack(select(2, ...))
+
+local Skin = CreateFrame("Frame", nil, UIParent)
+Skin:RegisterEvent("ADDON_LOADED")
+Skin:SetScript("OnEvent", function(self, event, addon)
+	if addon == "Clique" then
+		local tab = _G["CliqueSpellTab"]
+		tab:GetRegions():Hide()
+		tab:SetCheckedTexture(F.checked)
+		tab:GetNormalTexture():SetTexCoord(.08, .92, .08, .92)
+		F.CreateBG(tab)
+		F.CreateSD(tab, 5, 0, 0, 0, 1, 1)
+		select(4, tab:GetRegions()):SetTexCoord(.08, .92, .08, .92)
+		F.StripTextures(CliqueConfig)
+		F.StripTextures(CliqueConfigInset)
+		F.SetBD(CliqueConfig)
+		CliqueConfigPage1Column1:DisableDrawLayer("BACKGROUND")
+		CliqueConfigPage1Column2:DisableDrawLayer("BACKGROUND")
+		F.ReskinClose(CliqueConfigCloseButton)
+		F.Reskin(CliqueConfigPage1ButtonSpell)
+		CliqueConfigPage1ButtonSpell_RightSeparator:Kill()
+		F.Reskin(CliqueConfigPage1ButtonOther)
+		CliqueConfigPage1ButtonOther_RightSeparator:Kill()
+		F.Reskin(CliqueConfigPage1ButtonOptions)
+		CliqueConfigPage1ButtonOptions_LeftSeparator:Kill()
+	end
+end)

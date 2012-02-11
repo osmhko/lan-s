@@ -1,0 +1,10 @@
+﻿## Interface: 40300
+## Title: Molinari
+## Title-zhTW: Molinari
+## Notes: One-click Milling, Prospecting and Disenchanting!
+## Notes-zhTW: One-click Milling, Prospecting and Disenchanting!
+## Author: p3lim
+## Version: 40200.12-Beta
+
+Molinari.lua
+Disenchanting.lua

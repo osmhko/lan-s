@@ -1,0 +1,10 @@
+﻿## Interface: 40300
+## Title: Fatality
+## Title-zhTW: Fatality
+## Notes: Announces player deaths to chat. Type |cff00d4ed/fatality list|r for options.
+## Notes-zhTW: Announces player deaths to chat. Type |cff00d4ed/fatality list|r for options.
+## SavedVariables: FatalityDB
+## Author: Moop
+## Version: 1.2.3
+
+Fatality.lua

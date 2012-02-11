@@ -1,0 +1,9 @@
+﻿## Interface: 40300
+## Title: Media
+## Title-zhTW: Media
+## Notes: A global table of media.
+## Notes-zhTW: A global table of media.
+## Author: Originally gxMedia by Guardix
+## Version: 1.0
+
+media.lua

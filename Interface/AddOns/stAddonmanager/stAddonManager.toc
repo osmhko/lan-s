@@ -1,0 +1,11 @@
+﻿## Interface: 40300
+## Title: |cff00aaffst|rAddonManager
+## Title-zhTW: |cff00aaffst|rAddonManager
+## Notes: A simple and minimalistic addon to disable/enabled addons without logging out.
+## Notes-zhTW: A simple and minimalistic addon to disable/enabled addons without logging out.
+## Author: Safturento
+## Version: v1.3.2-712c7c1
+## SavedVariables: stAddonProfiles, stLockedAddons
+
+localization.lua
+stAddonManager.lua

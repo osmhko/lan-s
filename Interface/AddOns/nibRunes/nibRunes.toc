@@ -1,0 +1,12 @@
+﻿## Interface: 40300
+## Title: |cffaaaaaanib|rRunes
+## Title-zhTW: |cffaaaaaanib|rRunes
+## Notes: Simple DK Rune display
+## Notes-zhTW: Simple DK Rune display
+## Author: Nibelheim
+## Version: 1.6
+
+## X-WoWI-ID: 19525
+
+Config.lua
+Core.lua

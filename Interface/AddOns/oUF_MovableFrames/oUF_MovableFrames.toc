@@ -1,0 +1,15 @@
+﻿## Interface: 40300
+## Title: oUF: MovableFrames
+## Title-zhTW: oUF: MovableFrames
+## Notes: Easily move frames created by oUF.
+## Notes-zhTW: Easily move frames created by oUF.
+## Author: Haste
+## Version: 1.16
+## OptionalDeps: oUF
+## SavedVariables: bb08df87101dd7f2161e5b77cf750f753c58ef1b
+
+## X-eMail: troeks@gmail.com
+## X-SavedVariables: bb08df87101dd7f2161e5b77cf750f753c58ef1b
+## X-SlashCmdList: /omf
+
+movable.lua

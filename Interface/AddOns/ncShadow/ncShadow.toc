@@ -1,0 +1,10 @@
+﻿## Interface: 40300
+## Title: ncShadow
+## Title-zhTW: ncShadow
+## Notes: Creates a shadow overlay
+## Notes-zhTW: Creates a shadow overlay
+## Author: Nightcracker (Maintained by Ferous)
+## Version: 1.0.1
+## SavedVariables: ncShadowLevel
+
+ncShadow.lua

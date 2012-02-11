@@ -1,0 +1,7 @@
+﻿## Interface: 40300
+## Title: Friend Color
+## Title-zhTW: Friend Color
+## Notes: Colors your friend list based on raid colors.
+## Notes-zhTW: Colors your friend list based on raid colors.
+## Author: Awbee
+FriendColor.lua

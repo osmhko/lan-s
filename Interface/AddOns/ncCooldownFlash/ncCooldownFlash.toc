@@ -1,0 +1,11 @@
+﻿## Interface: 40300
+## Title: ncCooldownFlash
+## Title-zhTW: ncCooldownFlash
+## Notes: Flashes an icon in the middle of your screen when a cooldown ends.
+## Notes-zhTW: Flashes an icon in the middle of your screen when a cooldown ends.
+## Author: nightcracker
+## Version: 1.0
+
+libs\LibStub.lua
+libs\LibCooldown.lua
+ncCooldownFlash.lua

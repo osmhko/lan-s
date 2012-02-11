@@ -1,0 +1,9 @@
+﻿## Interface: 40300
+## Title: SYAB
+## Title-zhTW: SYAB
+## Notes: 
+## Notes-zhTW: 
+## OptionalDeps: Beauty
+core.lua
+config.lua
+actionbar.xml

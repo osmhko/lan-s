@@ -1,0 +1,12 @@
+﻿## Interface: 40300
+## Title: oUF
+## Title-zhTW: oUF
+## Notes: Unit frame framework. Does nothing by itself.
+## Notes-zhTW: Unit frame framework. Does nothing by itself.
+## Author: Haste
+## Version: 1.5.12
+## OptionalDeps: !ClassColors, Clique
+## X-eMail: troeks@gmail.com
+## X-oUF: oUF
+
+oUF.xml

@@ -1,0 +1,9 @@
+﻿## Interface: 40300
+## Title: |cff3399FF b|rChat
+## Title-zhTW: |cff3399FF b|rChat
+## Notes: 
+## Notes-zhTW: 
+## DefaultState: Enabled
+## LoadOnDemand: 0
+bChat.lua
+easyChannel.lua

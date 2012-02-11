@@ -1,0 +1,25 @@
+﻿## Interface: 40300
+## Title: aMini
+## Title-zhTW: aMini
+## Notes: Mini Addons compilation
+## Notes-zhTW: Mini Addons compilation
+## Version: 2.0
+
+Achievement.lua
+Align.lua
+AlreadyKnown.lua
+AuctionPlus.lua
+BlizzBugsSuck.lua
+castby.lua
+ClearFont.lua
+CombatNotification.lua
+Focuser.lua
+idQuestAutomation.lua
+iLvLr.lua
+InspectFix.lua
+ncHoverBind.lua
+m_Settings.lua
+QuestPrice.lua
+SpellID.lua
+talentspecspamfilter.lua
+yQuestLevel.lua

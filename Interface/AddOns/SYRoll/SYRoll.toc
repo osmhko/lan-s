@@ -1,0 +1,9 @@
+﻿## Interface: 40300
+## Title: SYRoll
+## Title-zhTW: SYRoll
+## Notes: 
+## Notes-zhTW: 
+## SavedVariables: SYRollDB
+
+Locale.lua
+SYRoll.lua

@@ -1,0 +1,13 @@
+﻿## Interface: 40300
+## Title: 美化
+## Title-zhTW: 美化
+## Notes: 
+## Notes-zhTW: 
+## OptionalDeps: Skada,DBM-Core
+core.lua
+mirror.lua
+timertracker.lua
+dbm.lua
+skada.lua
+buff.lua
+minimapbuttoncollector.lua

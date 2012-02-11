@@ -1,0 +1,103 @@
+Qulight = { }
+Qulight["media"] = {
+	["font"] = [=[FONTS\ARIALN.TTF]=], 			        -- main font in Qulight UI
+	["pxfont"] = [=[Interface\Addons\oUF_Qulight\Media\pxFont.ttf]=],----[=[FONTS\ARIALN.TTF]=],
+	["fontsize"] = 12, 														    		-- size of font 
+	["texture"] = "Interface\\AddOns\\oUF_Qulight\\Media\\statusbar4",				-- main texture in Qulight UI
+	["blank"] = "Interface\\Buttons\\WHITE8x8",											-- clean texture
+}
+
+Qulight["unitframes"] = {
+	["enable"] = true,																	-- enable/disable action bars
+	["HealthcolorClass"] = false,														-- health color = class color
+	["bigcastbar"] = false,
+	["Powercolor"] = true,																-- power color = class color
+	["showtot"] = true, 																-- show target of target frame
+	["showpet"] = true,																	-- show pet frame
+	["showfocus"] = true, 																-- show focus frame
+	["showfocustarget"] = true, 														-- show focus target frame
+	["showBossFrames"] = true, 															-- show boss frame
+	["TotemBars"] = true, 																-- show totem bars
+	["MTFrames"] = false, 																-- show main tank frames
+	["ArenaFrames"]  = true, 															-- show arena frame
+	["Reputationbar"] = true, 															-- show reputation bar
+	["Experiencebar"] = true, 															-- show experience bar
+	["showPlayerAuras"] = false, 														-- use a custom player buffs/debuffs frame instead of blizzard's default.
+	["ThreatBar"] = true,																-- show threat bar
+	["showPortrait"] = true,															-- show portraits
+	["showRunebar"] = true, 															-- show dk rune bar
+	["showHolybar"] = true, 															-- show paladin HolyPower bar
+	["showEclipsebar"] = true, 															-- show druid eclipse bar
+	["showShardbar"] = true, 															-- show warlock soulShard bar
+	["Castbars"] = true, 																-- use built-in castbars
+	["Anchorplayer"] = {"TOPRIGHT", UIParent, "BOTTOM", -150, 430},----------{"BOTTOM",  _UIActionBar1, "BOTTOM", 0, -80},----
+	["Anchortarget"] = {"TOPLEFT", UIParent, "BOTTOM", 150, 430},----{"BOTTOM",  _UIActionBar1, "BOTTOM", 0, 130},---
+	["Anchortot"] = {"TOPLEFT", UIParent, "BOTTOM", 380, 423}, 
+	["Anchorpet"] = {"TOPRIGHT", UIParent, "BOTTOM", -390, 423}, 
+	["Anchorplayercastbar"] = {"BOTTOM", UIParent, "BOTTOM", 12, 135},
+	["Anchortargetcastbar"] = {"BOTTOM", UIParent, "BOTTOM", 11, 180},
+	["Anchorfocus"] = {"BOTTOMLEFT", 300, 550}, 
+	["Anchorfocuscastbar"] = {"BOTTOMLEFT", 322, 590}, 
+	["Anchortank"] = {"BOTTOMLEFT", 310, 470},
+	["Anchorboss"] = {"BOTTOMRIGHT", -300, 550},
+}
+
+Qulight["raidframes"] = {
+	["enable"] = false,
+	["Anchorraid"] = {"TOPLEFT", UIParent, 20, -20},
+	["scale"] = 1.0,
+	["width"] = 76,
+    ["height"] = 22,
+    ["fontsize"] = 10,
+    ["fontsizeEdge"] = 12,
+    ["outline"] = "OUTLINE",
+    ["solo"] = false,
+    ["player"] = true,
+    ["party"] = true,
+    ["numCol"] = 5,
+    ["numUnits"] = 5,
+    ["spacing"] = 4.1,
+    ["orientation"] = "HORIZONTAL",
+    ["porientation"] = "HORIZONTAL",
+    ["horizontal"] = true, 
+    ["growth"] = "RIGHT", 
+    ["reversecolors"] = true,
+    ["definecolors"] = true,
+    ["powerbar"] = true,
+    ["powerbarsize"] = 0.12,
+    ["outsideRange"] = 1,
+    ["healtext"] = false,
+    ["healbar"] = true,
+    ["healoverflow"] = true,
+    ["healothersonly"] = false,
+    ["healalpha"] = .40,
+    ["roleicon"] = false,
+    ["indicatorsize"] = 6,
+    ["symbolsize"] = 11,
+    ["leadersize"] = 12,
+    ["aurasize"] = 18,
+    ["multi"] = false, --Use multiple headers for better group sorting. Note: This disables units per group and sets it to 5.
+    ["deficit"] = false,
+    ["perc"] = false,
+    ["actual"] = false,
+    ["myhealcolor"] = { 0, 1, 0.5, 0.4 },
+    ["otherhealcolor"] = { 0, 1, 0, 0.4 },
+    ["hpcolor"] = { 0.1, 0.1, 0.1, 1 },
+    ["hpbgcolor"] = { 0.5, 0.5, 0.5, 1 },
+    ["powercolor"] = { 1, 1, 1, 1 },
+    ["powerbgcolor"] = { 0.33, 0.33, 0.33, 1 },
+    ["powerdefinecolors"] = false,
+    ["colorSmooth"] = false,
+    ["gradient"] = { 1, 0, 0, 1 },
+    ["tborder"] = false,
+    ["fborder"] = false,
+    ["afk"] = true,
+    ["highlight"] = true,
+    ["dispel"] = true,
+    ["powerclass"] = true,
+    ["tooltip"] = true,
+    ["sortName"] = false,
+    ["sortClass"] = false,
+    ["classOrder"] = "DEATHKNIGHT,DRUID,HUNTER,MAGE,PALADIN,PRIEST,ROGUE,SHAMAN,WARLOCK,WARRIOR", --Uppercase English class names separated by a comma. \n { CLASS[,CLASS]... }"
+    ["hidemenu"] = true,
+}

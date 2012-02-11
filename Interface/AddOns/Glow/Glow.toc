@@ -1,0 +1,10 @@
+﻿## Interface: 40300
+## Title: 
+## Title-zhTW: 
+## Notes: 边框品质着色
+## Notes-zhTW: 边框品质着色
+## Tittle:SyDurGlowMod
+## Author: Sayoc
+## X-Mod: Neavo
+
+Glow.lua

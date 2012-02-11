@@ -1,0 +1,11 @@
+﻿## Interface: 40300
+## Title: WhoWhisperedMe
+## Title-zhTW: WhoWhisperedMe
+## Notes: Who The Hell Whispered Me?!
+## Notes-zhTW: Who The Hell Whispered Me?!
+## Author: Nedlinin
+## Version: 40000.1
+## SavedVariables: friendsWhisp, guildWhisp, totallastplayers, entries
+
+WhoWhisperedMe.xml
+WhoWhisperedMe.lua
