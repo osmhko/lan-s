@@ -6,7 +6,7 @@ else
 end
 
 C["actionbar"]={
-	bar3mode = 1,							-- 1:3 3123   2:123   3:1233
+	bar3mode = 3,							-- 1:3 3123   2:123   3:1233
 	
 	barinset = -1,	
 	buttonsize   = 26,
