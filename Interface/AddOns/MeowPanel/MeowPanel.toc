@@ -1,4 +1,5 @@
 ## Interface: 40300
-## Author: нч
+## Author: Baka Selina
 ## Title: MeowPanel
 MeowPanel.lua
+Chatbar.lua

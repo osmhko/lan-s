@@ -12,6 +12,7 @@ AuctionPlus.lua
 BlizzBugsSuck.lua
 castby.lua
 ClearFont.lua
+ChatFilter.lua
 CombatNotification.lua
 Focuser.lua
 HideBlizzardRaidui.lua
@@ -22,5 +23,4 @@ ncHoverBind.lua
 m_Settings.lua
 QuestPrice.lua
 SpellID.lua
-talentspecspamfilter.lua
 yQuestLevel.lua
