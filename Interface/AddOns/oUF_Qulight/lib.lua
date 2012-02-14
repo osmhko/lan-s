@@ -378,11 +378,11 @@ lib.gen_hpbar = function(f)
 	f.Health = s
 end
 lib.gen_hpstrings = function(f)
-    local name = lib.gen_fontstring(f.Health, Qulight["media"].font, 10, retVal(f,17,12,12,15), "OUTLINE")
+    local name = lib.gen_fontstring(f.Health, Qulight["media"].font, Qulight["media"].fontsize, retVal(f,17,12,12,15), "OUTLINE")
     name:SetPoint("LEFT", f.Health, "TOPLEFT", retVal(f,3,3,3,3), retVal(f,-17,-11,-15,-10))
     name:SetJustifyH("LEFT")
 	
-    local hpval = lib.gen_fontstring(f.Health, Qulight["media"].font, 9, retVal(f,17,12,10,12), "OUTLINE")
+    local hpval = lib.gen_fontstring(f.Health, Qulight["media"].font, Qulight["media"].fontsize-1, retVal(f,17,12,10,12), "OUTLINE")
     hpval:SetPoint("RIGHT", f.Health, "TOPRIGHT", retVal(f,-3,-3,-1,-3), retVal(f,-10,-11,-15,-11))
     hpval.frequentUpdates = 0.1
 	
@@ -399,7 +399,7 @@ lib.gen_hpstrings = function(f)
 	
 	local per = f.Health:CreateFontString(nil, "OVERLAY")
 	per:SetPoint("RIGHT", -3, -3)
-	per:SetFont(Qulight["media"].font, 9, "OUTLINE")
+	per:SetFont(Qulight["media"].font, Qulight["media"].fontsize-1, "OUTLINE")
 	f:Tag(per, retVal(f,'[color][power] | [perpp]%'))		
 end
 lib.gen_ppbar = function(f)
@@ -677,10 +677,10 @@ lib.gen_castbar = function(f)
     sp:SetBlendMode("ADD")
     sp:SetAlpha(0.5)
     sp:SetHeight(s:GetHeight()*2.5)
-    local txt = lib.gen_fontstring(s, Qulight["media"].font, 10, "NONE")
+    local txt = lib.gen_fontstring(s, Qulight["media"].font, Qulight["media"].fontsize, "NONE")
     txt:SetPoint("LEFT", 2, 0)
     txt:SetJustifyH("LEFT")
-    local t = lib.gen_fontstring(s, Qulight["media"].font, 10, "NONE")
+    local t = lib.gen_fontstring(s, Qulight["media"].font, Qulight["media"].fontsize, "NONE")
     t:SetPoint("RIGHT", -2, 0)
     txt:SetPoint("RIGHT", t, "LEFT", -5, 0)
     local i = s:CreateTexture(nil, "ARTWORK")
@@ -708,7 +708,7 @@ lib.gen_castbar = function(f)
         z:SetPoint("BOTTOMRIGHT")
 	    s:SetFrameLevel(10)
         s.SafeZone = z
-        local l = lib.gen_fontstring(s, Qulight["media"].font, 10, "OUTLINE")
+        local l = lib.gen_fontstring(s, Qulight["media"].font, Qulight["media"].fontsize, "OUTLINE")
         l:SetPoint("CENTER", -2, 17)
         l:SetJustifyH("RIGHT")
 	    l:Hide()
@@ -773,10 +773,10 @@ lib.gen_bigcastbar = function(f)
     sp:SetBlendMode("ADD")
     sp:SetAlpha(0.5)
     sp:SetHeight(s:GetHeight()*2.5)
-    local txt = lib.gen_fontstring(s, Qulight["media"].font, 10, "NONE")
+    local txt = lib.gen_fontstring(s, Qulight["media"].font, Qulight["media"].fontsize, "NONE")
     txt:SetPoint("LEFT", 2, 0)
     txt:SetJustifyH("LEFT")
-    local t = lib.gen_fontstring(s, Qulight["media"].font, 10, "NONE")
+    local t = lib.gen_fontstring(s, Qulight["media"].font, Qulight["media"].fontsize, "NONE")
     t:SetPoint("RIGHT", -2, 0)
     txt:SetPoint("RIGHT", t, "LEFT", -5, 0)
     local i = s:CreateTexture(nil, "ARTWORK")
@@ -800,7 +800,7 @@ lib.gen_bigcastbar = function(f)
         z:SetPoint("BOTTOMRIGHT")
 	    s:SetFrameLevel(10)
         s.SafeZone = z
-        local l = lib.gen_fontstring(s, Qulight["media"].font, 10, "OUTLINE")
+        local l = lib.gen_fontstring(s, Qulight["media"].font, Qulight["media"].fontsize, "OUTLINE")
         l:SetPoint("CENTER", -2, 17)
         l:SetJustifyH("RIGHT")
 	    l:Hide()
@@ -876,20 +876,20 @@ local postCreateIcon = function(element, button)
 	CreateShadow0(h)
 	
 	if self.mystyle == "player" then
-		local time = lib.gen_fontstring(button, Qulight["media"].pxfont, 10, "OUTLINE")
+		local time = lib.gen_fontstring(button, Qulight["media"].pxfont, Qulight["media"].fontsize, "OUTLINE")
 		time:SetPoint("BOTTOM", button, "BOTTOM", 2, -4)
 		time:SetJustifyH("CENTER")
 		time:SetVertexColor(1,1,1)
 		button.time = time
 	else
-		local time = lib.gen_fontstring(button, Qulight["media"].pxfont, 10, "OUTLINE")
+		local time = lib.gen_fontstring(button, Qulight["media"].pxfont, Qulight["media"].fontsize, "OUTLINE")
 		time:SetPoint("BOTTOM", button, "BOTTOM", 2, -4)
 		time:SetJustifyH("CENTER")
 		time:SetVertexColor(1,1,1)
 		button.time = time
 	end
 		
-	local count = lib.gen_fontstring(button, Qulight["media"].pxfont, 10, "OUTLINE")
+	local count = lib.gen_fontstring(button, Qulight["media"].pxfont, Qulight["media"].fontsize, "OUTLINE")
 	count:SetPoint("CENTER", button, "TOPRIGHT", 0, 0)
 	count:SetJustifyH("RIGHT")
 	button.count = count
@@ -1085,7 +1085,7 @@ lib.addEclipseBar = function(self)
 	
 	local eclipseBarText = solarBar:CreateFontString(nil, 'OVERLAY')
 	eclipseBarText:SetPoint("CENTER", eclipseBar, "CENTER", 0, 0)	
-	eclipseBarText:SetFont(Qulight["media"].font, 9, "OUTLINE")
+	eclipseBarText:SetFont(Qulight["media"].font, Qulight["media"].fontsize-1, "OUTLINE")
 	self:Tag(eclipseBarText, '[pereclipse]%')
 	self.EclipseBar = eclipseBar
 end
@@ -1301,7 +1301,7 @@ lib.ThreatBar = function(self)
 		h:SetPoint("BOTTOMRIGHT",5,-5)
 		CreateShadow0(h) 
 		
-	--	ThreatBar.Text = SetFontString(ThreatBar, Qulight["media"].font, 10, "OUTLINE")
+	--	ThreatBar.Text = SetFontString(ThreatBar, Qulight["media"].font, Qulight["media"].fontsize, "OUTLINE")
 	--	ThreatBar.Text:SetPoint("CENTER", ThreatBar, "CENTER", 0, 1)
 	
 		ThreatBar.bg = ThreatBar:CreateTexture(nil, 'BORDER')
@@ -1357,7 +1357,7 @@ lib.AltPowerBar = function(self)
 	AltPowerBar:SetBackdropColor(.05,.05,.05, 1)
 	AltPowerBar:SetBackdropBorderColor(0, 0, 0, 0)	
 		
-	AltPowerBar.text = SetFontString(AltPowerBar, Qulight["media"].font, 10, "OUTLINE")
+	AltPowerBar.text = SetFontString(AltPowerBar, Qulight["media"].font, Qulight["media"].fontsize, "OUTLINE")
 	AltPowerBar.text:SetPoint("CENTER")
 	self:Tag(AltPowerBar.text, '[altpower]')
 		

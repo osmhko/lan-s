@@ -2,7 +2,7 @@ Qulight = { }
 Qulight["media"] = {
 	["font"] = [=[FONTS\ARIALN.TTF]=], 			        -- main font in Qulight UI
 	["pxfont"] = [=[Interface\Addons\oUF_Qulight\Media\pxFont.ttf]=],----[=[FONTS\ARIALN.TTF]=],
-	["fontsize"] = 12, 														    		-- size of font 
+	["fontsize"] = 18, 														    		-- size of font 
 	["texture"] = "Interface\\AddOns\\oUF_Qulight\\Media\\statusbar4",				-- main texture in Qulight UI
 	["blank"] = "Interface\\Buttons\\WHITE8x8",											-- clean texture
 }
@@ -48,7 +48,7 @@ Qulight["raidframes"] = {
 	["scale"] = 1.0,
 	["width"] = 68,
     ["height"] = 30,
-    ["fontsize"] = 12,
+    ["fontsize"] = 18,
     ["fontsizeEdge"] = 12,
     ["outline"] = "OUTLINE",
     ["solo"] = false,

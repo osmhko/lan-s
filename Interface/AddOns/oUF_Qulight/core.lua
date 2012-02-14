@@ -359,7 +359,7 @@ SlashCmdList.TESTUF = function()
 				v.fff:SetPoint("TOPLEFT", v, -2, 2)
 				v.fff:SetPoint("BOTTOMRIGHT", v, 2, -2)
 			
-				v.fffs = SetFontString(v.fff, Qulight["media"].font, 10, "OUTLINE")
+				v.fffs = SetFontString(v.fff, Qulight["media"].font, Qulight["media"].fontsize, "OUTLINE")
 				v.fffs:SetShadowOffset(0, 0)
 				v.fffs:SetAllPoints(v.fff)
 				v.fffs:SetText(v:GetName())
