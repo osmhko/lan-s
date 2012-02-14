@@ -20,8 +20,8 @@ end
 -------------------------------------------------------------------------------------
 local TARGETYOU = "<你>"
 local worldBoss = "首领"
-local rareElite = "稀有+"
-local rare = "稀有"
+local rareElite = "|cffCF2222稀有+|r"
+local rare = "|cffCF2222稀有|r"
 local TARGET = "|cfffed100"..TARGET..":|r "	
 local bdcRGB = {.05, .05, .05, 0.8} --Background color
 local bdbcRGB = {0, 0, 0, 1} --Border color

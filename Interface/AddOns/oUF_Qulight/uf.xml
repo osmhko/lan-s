@@ -3,6 +3,7 @@
 	<Script file="lib.lua"/>
 	<Script file="core.lua"/>
 	<Script file="Plugins\Smooth.lua"/>
+	<Script file="Plugins\BarFader.lua"/>
 	<Script file="Plugins\Experience.lua"/>
 	<Script file="Plugins\TotemBar.lua"/>
 	<Script file="Plugins\ThreatBar.lua"/>

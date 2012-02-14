@@ -1,4 +1,4 @@
-local _, ns = ...
+﻿local _, ns = ...
 
 local spellcache = setmetatable({}, {__index=function(t,v) local a = {GetSpellInfo(v)} if GetSpellInfo(v) then t[v] = a end return a end})
 local function GetSpellInfo(a)
@@ -47,8 +47,7 @@ ns.auras = {
 		[GetSpellInfo(8122)] = 3, --Psychic Scream
 		[GetSpellInfo(9484)] = 3, --Shackle Undead
 		[GetSpellInfo(15487)] = 3, --Silence
-		--[GetSpellInfo(6788)] = 1, --���
-	-- Rogue
+		--[GetSpellInfo(6788)] = 1, --󴢊	-- Rogue
 		[GetSpellInfo(2094)] = 3, --Blind
 		[GetSpellInfo(1776)] = 3, --Gouge
 		[GetSpellInfo(6770)] = 3, --Sap
@@ -73,8 +72,38 @@ ns.auras = {
 		[GetSpellInfo(25046)] = 3, --Arcane Torrent
 		[GetSpellInfo(20549)] = 3, --War Stomp
     },
+	tankauras = {
+		[GetSpellInfo(871)] = 1,	-- 盾墙
+		[GetSpellInfo(12975)] = 1,	--破釜沉舟
+		[GetSpellInfo(97463)] = 1,	--集结呐喊
+		[GetSpellInfo(2565)] = 1,	--盾牌格挡
+		--------------------------骑士---------------
+		[GetSpellInfo(642)] = 1,	--圣盾术
+		[GetSpellInfo(86659)] = 1,	--远古列王守卫
+		[GetSpellInfo(70940)] = 1,	--神圣守卫
+		[GetSpellInfo(31850)] = 1,	--炽热防御者
+		[GetSpellInfo(498)] = 1,	--圣佑术
+		[GetSpellInfo(1022)] = 1,	--保护之手
+		[GetSpellInfo(1038)] = 1,	--拯救之手
+		[GetSpellInfo(6940)] = 1,	--牺牲之手
+		
+		--------------------------DK---------------
+		[GetSpellInfo(48707)] = 1,	--反魔法护罩
+		[GetSpellInfo(50461)] = 1,	--反魔法领域
+		--[GetSpellInfo(49222)] = 1,	--白骨之盾
+		[GetSpellInfo(48792)] = 1,	--冰封之韧
+		[GetSpellInfo(55233)] = 1,	--吸血鬼之血
+		------------------------德鲁伊---------------
+		[GetSpellInfo(22812)] = 1,	--树皮术
+		[GetSpellInfo(22842)] = 1,	--狂暴回复
+		[GetSpellInfo(61336)] = 1,	--生存本能
+		------------------------牧师--------------------
+		[GetSpellInfo(33206)] = 1, --痛苦压制
+		[GetSpellInfo(47788)] = 1, --守护之魂
+	},
 
     buffs = {
+        --[GetSpellInfo(32223)] = 15, -- Just for testing
         --[GetSpellInfo(871)] = 15, -- Shield Wall
     },
 
@@ -274,5 +303,58 @@ ns.auras = {
             [GetSpellInfo(93294)] = 8, -- Lightning Rod
             [GetSpellInfo(93284)] = 9, -- Squall Line
         },
+		-- Dragon Soul
+	   [824] = {
+		  --Morchok
+		  [GetSpellInfo(103687)] = 11, --Crush Armor
+		  [GetSpellInfo(103821)] = 12, --Earthen Vortex
+		  [GetSpellInfo(103785)] = 13, --Black Blood of the Earth
+		  [GetSpellInfo(103534)] = 14, --Danger (Red)
+		  [GetSpellInfo(103536)] = 15, --Warning (Yellow)
+		  -- Don't need to show Safe people
+		  [GetSpellInfo(103541)] = 16, --Safe (Blue)
+
+		  --Warlord Zon'ozz
+		  [GetSpellInfo(104378)] = 21, --Black Blood of Go'rath
+		  [GetSpellInfo(103434)] = 22, --Disrupting Shadows (dispellable)
+
+		  --Yor'sahj the Unsleeping
+		  [GetSpellInfo(104849)] = 31, --Void Bolt
+		  [GetSpellInfo(105171)] = 32, --Deep Corruption
+
+		  --Hagara the Stormbinder
+		  [GetSpellInfo(105316)] = 41, --Ice Lance
+		  [GetSpellInfo(105465)] = 42, --Lightning Storm
+		  [GetSpellInfo(105369)] = 43, --Lightning Conduit
+		  [GetSpellInfo(105289)] = 44, --Shattered Ice (dispellable)
+		  [GetSpellInfo(105285)] = 45, --Target (next Ice Lance)
+		  [GetSpellInfo(104451)] = 46, --Ice Tomb
+		  [GetSpellInfo(110317)] = 47, --Watery Entrenchment
+
+		  --Ultraxion
+		  [GetSpellInfo(105925)] = 51, --Fading Light
+		  [GetSpellInfo(106108)] = 52, --Heroic Will
+		  [GetSpellInfo(105984)] = 53, --Timeloop
+		  [GetSpellInfo(105927)] = 54, --Faded Into Twilight
+
+		  --Warmaster Blackhorn
+		  [GetSpellInfo(108043)] = 61, --Sunder Armor
+		  [GetSpellInfo(107558)] = 62, --Degeneration
+		  [GetSpellInfo(107567)] = 64, --Brutal Strike
+		  [GetSpellInfo(108046)] = 64, --Shockwave
+
+		  --Spine of Deathwing
+		  [GetSpellInfo(105563)] = 71, --Grasping Tendrils
+		  [GetSpellInfo(105479)] = 72, --Searing Plasma
+		  [GetSpellInfo(105490)] = 73, --Fiery Grip
+
+		  --Madness of Deathwing
+		  [GetSpellInfo(105445)] = 81, --Blistering Heat
+		  [GetSpellInfo(105841)] = 82, --Degenerative Bite
+		  [GetSpellInfo(106385)] = 83, --Crush
+		  [GetSpellInfo(106730)] = 84, --Tetanus
+		  [GetSpellInfo(106444)] = 85, --Impale
+		  [GetSpellInfo(106794)] = 86, --Shrapnel (target)
+	   },
     },
 }

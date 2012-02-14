@@ -4,9 +4,14 @@ oUF.colors.smooth = {.7, .15, .15, .85, .8, .45, .15, .15, .15}
 -----------------------------
 -- STYLE FUNCTIONS
 -----------------------------
+local BarFader = function(self)
+	self.BarFade = true
+	self.BarFaderMinAlpha = "0"
+end
 local function CreatePlayerStyle(self, unit, isSingle)
 	self.mystyle = "player"
 	lib.init(self)
+	BarFader(self)
 	self.scale = scale
 	self:SetSize(220,38)
 	lib.gen_hpbar(self)
@@ -52,6 +57,7 @@ end
 local function CreateTargetStyle(self, unit, isSingle)
 	self.mystyle = "target"
 	lib.init(self)
+--	BarFader(self)
 	self.scale = scale
 	self:SetSize(220,38)
 	lib.gen_hpbar(self)
@@ -128,7 +134,7 @@ local function CreateToTStyle(self, unit, isSingle)
 	self.Power.colorClass = true
 	self.Power.colorHealth = true
 	self.Power.bg.multiplier = 0.5
-	
+	self:SetParent("oUF_Target")
 	self.Health.frequentUpdates = false
 	if Qulight["unitframes"].HealthcolorClass then
 	self.Health.colorClass = true
@@ -171,7 +177,7 @@ local function CreatePetStyle(self, unit, isSingle)
 	self.Power.bg.multiplier = 0.5
 	lib.gen_highlight(self)
 	lib.gen_RaidMark(self)
-	
+	self:SetParent("oUF_Player")
 	self.Health.frequentUpdates = false
 	if PlayerClass == "HUNTER" then
 		self.Power.colorReaction = false

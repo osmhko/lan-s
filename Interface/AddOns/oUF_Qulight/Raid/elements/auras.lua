@@ -177,6 +177,10 @@ local CustomFilter = function(icons, ...)
         icon.priority = ns.auras.buffs[name]
         icon.buff = true
         return true
+	elseif ns.auras.tankauras[name] then
+        icon.priority = ns.auras.tankauras[name]
+        icon.buff = true
+        return true
     elseif Qulight["raidframes"].dispel and dispellist[dtype] then
         icon.priority = dispelPriority[dtype]
         return true

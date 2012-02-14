@@ -7,3 +7,4 @@
 
 Locale.lua
 SYRoll.lua
+rollcolector.lua
