@@ -15,7 +15,6 @@ ClearFont.lua
 ChatFilter.lua
 CombatNotification.lua
 Focuser.lua
-HideBlizzardRaidui.lua
 idQuestAutomation.lua
 iLvLr.lua
 InspectFix.lua

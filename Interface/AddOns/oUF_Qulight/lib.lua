@@ -15,6 +15,16 @@ fontsymbol = "Interface\\AddOns\\oUF_Qulight\\Media\\symbol.ttf"
 --------------------------------------------------------------------------------------
 -- Backdrop/Shadow/Glow/Border
 -----------------
+local frame = CompactRaidFrameManager
+   frame:UnregisterAllEvents()
+   frame.Show = function() end
+   frame:Hide()
+   
+   local frame = CompactRaidFrameContainer
+   frame:UnregisterAllEvents()
+   frame.Show = function() end
+   frame:Hide()
+   
 local SetFontString = function(parent, fontName, fontHeight, fontStyle)
 		local fs = parent:CreateFontString(nil, "OVERLAY")
 		fs:SetFont(Qulight["media"].font, fontHeight, fontStyle)
@@ -652,8 +662,9 @@ lib.gen_castbar = function(f)
 		s:SetWidth(200)
 		s:SetPoint("TOP", f, "BOTTOM", -10,-5)---s:SetPoint("TOP", f, "TOP", -10,20)
 	elseif f.mystyle == "focus" then
-		s:SetWidth(f:GetWidth()-18)
-        s:SetPoint("BOTTOM", Anchorfocuscastbar)
+		s:SetHeight(15)
+		s:SetWidth(200)
+		s:SetPoint("TOP", f, "TOP", 10,20)
     end
 	if f.mystyle == "boss"  then
 	    s:SetHeight(10)

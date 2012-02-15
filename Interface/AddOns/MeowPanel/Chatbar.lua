@@ -1,7 +1,7 @@
 ﻿local _, SR = ...
 local cfg = SR.ChatConfig
 
-local Channel = {"/s ","/y ","/p ","/g ","/raid ","/1 ","/2 "}
+--local Channel = {"/s ","/y ","/p ","/g ","/raid ","/1 ","/2 "}
 local Color = {
 	{255/255, 255/255, 255/255, 0.8},
 	{255/255,  64/255,  64/255, 0.8},
@@ -16,7 +16,7 @@ local Color = {
 local Chatbar = CreateFrame("Frame","Chatbar",UIParent)
 Chatbar:SetWidth(160)
 Chatbar:SetHeight(20)
-Chatbar:SetPoint("TOPRIGHT", ChatFrame1, "BOTTOMLEFT", 33, -15)
+Chatbar:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 7, 1)
 Chatbar:SetScale(0.9)
 
 -- for i=1,7 do
@@ -47,7 +47,7 @@ local roll = CreateFrame("Button",nil, Chatbar, "SecureActionButtonTemplate")
 --roll:SetAttribute("macrotext", "/roll")
 roll:SetWidth(40)
 roll:SetHeight(Chatbar:GetHeight())
-roll:SetPoint("RIGHT",Chatbar,"RIGHT",0,0)
+roll:SetPoint("LEFT",Chatbar,"LEFT",0,0)
 roll:SetBackdrop( { 
 	bgFile = "Interface\\Addons\\Media\\Statusbar",
 	insets = { left = 3, right = 3, top = 3, bottom = 3 },
@@ -56,7 +56,7 @@ roll:SetBackdrop( {
 roll:SetBackdropColor(unpack(Color[8]))
 roll:SetBackdropBorderColor(0,0,0,1)	
 roll:RegisterForClicks("AnyUp")
-roll:RegisterEvent("PLAYER_ENTERING_WORLD")
+roll:RegisterEvent("CHAT_MSG_CHANNEL")
 roll:SetScript("OnClick",function(self)
 	local name = "大脚世界频道"
 	local channels = {GetChannelList()}
@@ -80,16 +80,16 @@ roll:SetScript("OnClick",function(self)
 	end
 end)
 roll:SetScript("OnEvent", function(self)
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+	--self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	local channels = {GetChannelList()}
-	local isInCustomChannel = false
+	local inchannel = false
 	local name = "大脚世界频道"
 	for i =1, #channels do
 		if channels[i] == name then
-			isInCustomChannel = true
+			inchannel = true
 		end
 	end
-	if isInCustomChannel then 
+	if inchannel then 
 		self:SetBackdropColor(.1,1,.1)
 	else
 		self:SetBackdropColor(1,.1,.1)

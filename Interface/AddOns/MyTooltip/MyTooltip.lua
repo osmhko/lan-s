@@ -20,8 +20,8 @@ end
 -------------------------------------------------------------------------------------
 local TARGETYOU = "<你>"
 local worldBoss = "首领"
-local rareElite = "|cffCF2222稀有+|r"
-local rare = "|cffCF2222稀有|r"
+local rareElite = "|cffFF00FF稀有+|r"
+local rare = "|cffFF00FF稀有|r"
 local TARGET = "|cfffed100"..TARGET..":|r "	
 local bdcRGB = {.05, .05, .05, 0.8} --Background color
 local bdbcRGB = {0, 0, 0, 1} --Border color
@@ -399,7 +399,7 @@ end
 
 	local anchorframe = CreateFrame("Frame", "Tooltip anchor", UIParent)
 	anchorframe:SetSize(150, 20)
-	anchorframe:SetPoint("BOTTOMRIGHT",UIParent,-200,400)
+	anchorframe:SetPoint("RIGHT",UIParent,-400,0)
 	if IsAddOnLoaded("!MyGUI") and UIMovableFrames then tinsert(UIMovableFrames, anchorframe) end
 	
 	hooksecurefunc("GameTooltip_SetDefaultAnchor", function(tooltip, parent)

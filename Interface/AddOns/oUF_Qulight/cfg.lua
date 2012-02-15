@@ -2,7 +2,7 @@ Qulight = { }
 Qulight["media"] = {
 	["font"] = [=[FONTS\ARIALN.TTF]=], 			        -- main font in Qulight UI
 	["pxfont"] = [=[Interface\Addons\oUF_Qulight\Media\pxFont.ttf]=],----[=[FONTS\ARIALN.TTF]=],
-	["fontsize"] = 18, 														    		-- size of font 
+	["fontsize"] = 11, 														    		-- size of font 
 	["texture"] = "Interface\\AddOns\\oUF_Qulight\\Media\\statusbar4",				-- main texture in Qulight UI
 	["blank"] = "Interface\\Buttons\\WHITE8x8",											-- clean texture
 }
@@ -37,7 +37,7 @@ Qulight["unitframes"] = {
 	["Anchorplayercastbar"] = {"BOTTOM", UIParent, "BOTTOM", 12, 135},
 	["Anchortargetcastbar"] = {"BOTTOM", UIParent, "BOTTOM", 11, 180},
 	["Anchorfocus"] = {"BOTTOMLEFT", 300, 550}, 
-	["Anchorfocuscastbar"] = {"BOTTOMLEFT", 322, 590}, 
+	["Anchorfocuscastbar"] = {"CENTER", 322, 800}, 
 	["Anchortank"] = {"BOTTOMLEFT", 310, 470},
 	["Anchorboss"] = {"BOTTOMRIGHT", -300, 550},
 }
@@ -48,7 +48,7 @@ Qulight["raidframes"] = {
 	["scale"] = 1.0,
 	["width"] = 68,
     ["height"] = 30,
-    ["fontsize"] = 18,
+    ["fontsize"] = 12,
     ["fontsizeEdge"] = 12,
     ["outline"] = "OUTLINE",
     ["solo"] = false,

@@ -6,9 +6,38 @@ local SellGreyCrap = true
 local autoUIscale = false
 local HideErrors = false
 local autoacceptDE = false
+--------------------------------------------成就截图
+local function TakeScreen(delay, func, ...)
+local waitTable = {}
+local waitFrame = CreateFrame("Frame", "WaitFrame", UIParent)
+   waitFrame:SetScript("onUpdate", function (self, elapse)
+      local count = #waitTable
+      local i = 1
+      while (i <= count) do
+         local waitRecord = tremove(waitTable, i)
+         local d = tremove(waitRecord, 1)
+         local f = tremove(waitRecord, 1)
+         local p = tremove(waitRecord, 1)
+         if (d > elapse) then
+            tinsert(waitTable, i, {d-elapse, f, p})
+            i = i + 1
+         else
+            count = count - 1
+            f(unpack(p))
+         end
+      end
+   end)
+   tinsert(waitTable, {delay, func, {...} })
+end
+local function OnEvent(...)
+   TakeScreen(1, Screenshot)
+end
+local AchScreen = CreateFrame("Frame")
+AchScreen:RegisterEvent("ACHIEVEMENT_EARNED")
+AchScreen:SetScript("OnEvent", OnEvent)
 
 
-
+----------------------------------------------------------
 local eventcount = 0
 local a = CreateFrame("Frame")
 a:RegisterAllEvents()
@@ -357,6 +386,31 @@ SetCVar("showTutorials", 0)
    ToggleChatColorNamesByClassGroup(true, "CHANNEL4")
    ToggleChatColorNamesByClassGroup(true, "CHANNEL5")
    ToggleChatColorNamesByClassGroup(true, "CHANNEL6")
+   
+   --每一个button的長、寬，空隙，綜合/交易/本地防務/組隊 頻道的顏色
+-- local buttontex = "Interface\\AddOns\\m_chat\\textures\\bartexture"
+-- local buttonwidth, buttonheight, buttonspacing = 25, 12, 2.5
+-- local c1r, c1g, c1b = 160/255, 200/255 ,215/255  --綜合
+-- local c2r, c2g, c2b = 255/255, 130/255, 130/255  --交易
+-- local c3r, c3g, c3b = 255/255, 255/255, 150/255  --防務
+-- local c4r, c4g, c4b = 150/255, 255/255, 185/255  --組隊
+
+
+--local chat = CreateFrame("Frame","chat",UIParent)
+--chat:RegisterEvent("PLAYER_ENTERING_WORLD")
+--這一段是定義頻道顏色的，如果不喜歡就刪掉
+-- chat:SetScript("OnEvent", function(self, event)
+    -- if event == "PLAYER_ENTERING_WORLD" then
+	    -- ChangeChatColor("CHANNEL1", c1r, c1g, c1b)
+		-- ChangeChatColor("CHANNEL2", c2r, c2g, c2b)
+		-- ChangeChatColor("CHANNEL3", c3r, c3g, c3b)
+		-- ChangeChatColor("CHANNEL4", c4r, c4g, c4b)
+		-- ChangeChatColor("CHANNEL5", c2r, c2g, c2b)
+		-- ChangeChatColor("CHANNEL6", 1/255 234/255 255/255)
+	-- end
+-- end)
+
+
 
 ---------------- > AutoRepair and sell grey junk
 local g = CreateFrame("Frame")
