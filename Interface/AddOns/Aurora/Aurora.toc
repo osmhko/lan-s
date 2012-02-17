@@ -2,8 +2,10 @@
 ## Title: Aurora
 ## Notes: Minimalistic window themes.
 ## Author: Haleth/Freethinker
+## OptionalDeps: Beauty
 ## Version: 3.5.1
 
 aurora.lua
 clique.lua
 TradeTabs.lua
+map.lua

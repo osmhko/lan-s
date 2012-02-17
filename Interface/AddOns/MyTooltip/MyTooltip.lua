@@ -321,7 +321,7 @@ end
 		end
 	end)
 	
-	local Tooltips = {GameTooltip, ItemRefTooltip, ShoppingTooltip1, ShoppingTooltip2, ShoppingTooltip3}
+	local Tooltips = {GameTooltip, ItemRefTooltip, ShoppingTooltip1, ShoppingTooltip2, ShoppingTooltip3, WorldMapTooltip}
 	for i, v in ipairs(Tooltips) do
 		v:SetBackdrop(nil)
 		v.bg = CreateFrame("Frame", nil, v)

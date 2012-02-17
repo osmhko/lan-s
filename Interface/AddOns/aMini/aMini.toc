@@ -21,5 +21,6 @@ InspectFix.lua
 ncHoverBind.lua
 m_Settings.lua
 QuestPrice.lua
+SetCVar.lua
 SpellID.lua
 yQuestLevel.lua

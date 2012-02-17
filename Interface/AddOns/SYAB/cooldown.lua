@@ -1,7 +1,7 @@
 local cfg={}
 cfg.stancealpha = true
 cfg.HoT = true
-cfg.font = "Fonts\\FRIZQT__.TTF"
+cfg.font = "Fonts\\ZYKai_C.TTF"
 cfg.cdalpha = 0.4
 cfg.readyalpha = 1
 

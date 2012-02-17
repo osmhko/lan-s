@@ -6,7 +6,7 @@ else
 end
 
 local holder = CreateFrame('Frame', nil, UIParent)
-holder:Point('TOP', UIParent, 'TOP', 0, -150)
+holder:Point('BOTTOMLEFT', UIParent, 'BOTTOMLEFT', 200, 400)
 holder:Size(ExtraActionBarFrame:GetSize())
 ExtraActionBarFrame:SetParent(holder)
 ExtraActionBarFrame:ClearAllPoints()
