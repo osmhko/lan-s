@@ -1,7 +1,105 @@
---EUI
-local wgtimenoti = true
-local combatnoti = true
+local cfg = {}
+cfg.onlyshowboss = false
+cfg.enableexecute = true
+cfg.font = "Fonts\\ZYKai_T.ttf"
+cfg.fontflag = "OUTLINE" -- for pixelcfg.font stick to this else OUTLINE or THINOUTLINE
+cfg.fontsize = 24 -- cfg.font size
+cfg.iconsize = 24
+band = bit.band
 
+local announce = CreateFrame("Frame")
+local COMBATLOG_OBJECT_AFFILIATION_MINE = COMBATLOG_OBJECT_AFFILIATION_MINE
+
+local ClassThreshold = {
+	["WARRIOR"] = { 0.2, 0.2, 0},
+	["DRUID"] = { 0, 0.25, 0.25},
+	["PALADIN"] = { 0, 0, 0.2},
+	["PRIEST"] = { 0, 0, 0.25},
+	["DEATHKNIGHT"] = { 0, 0.35, 0},
+	["WARLOCK"] = { 0.25, 0.25, 0.25},
+	["ROGUE"] = { 0.35, 0, 0},
+	["HUNTER"] = { 0.2, 0.2, 0.2},
+	["MAGE"] = { 0, 0.35, 0},
+	["SHAMAN"] = { 0, 0, 0},	
+}
+local ExecuteThreshold, flag = ClassThreshold[select(2, UnitClass("player"))][GetPrimaryTalentTree()], 1
+ 
+-- Frame function
+local function CreateMessageFrame(name)
+	local f = CreateFrame("ScrollingMessageFrame", name, UIParent)
+	f:SetHeight(80)
+	f:SetWidth(500)
+	f:SetPoint("CENTER", 0, 120)
+	f:SetFrameStrata("HIGH")
+	f:SetTimeVisible(1.5)
+	f:SetFadeDuration(1.5)
+	f:SetMaxLines(3)
+	f:SetFont(cfg.font, cfg.fontsize, cfg.fontflag)
+	f:SetShadowOffset(1.5,-1.5)
+	return f
+end
+
+local announceMessages = CreateMessageFrame("fDispelFrame")
+ 
+local function OnEvent(self, event, timestamp, eventType, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags, ...)
+	if (eventType=="SPELL_DISPEL" or eventType=="SPELL_STOLEN" or eventType=="SPELL_INTERRUPT" or eventType=="SPELL_DISPEL_FAILED" or eventType=="CAST_SUCCESS") and band(sourceFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) == COMBATLOG_OBJECT_AFFILIATION_MINE then
+		local _, _, _, id, effect, _, etype = ...
+		local msg = _G["ACTION_" .. eventType]
+		local color
+		local icon =GetSpellTexture(id)
+
+		if eventType=="SPELL_INTERRUPT" then
+			if GetRealNumRaidMembers() > 0 then
+				SendChatMessage(msg..": "..destName.." \124cff71d5ff\124Hspell:"..id.."\124h["..effect.."]\124h\124r!", "RAID")
+			elseif GetRealNumPartyMembers() > 0 then
+				SendChatMessage(msg..": "..destName.." \124cff71d5ff\124Hspell:"..id.."\124h["..effect.."]\124h\124r!", "PARTY")
+			end
+		end
+		
+		if etype=="BUFF"then
+			color={0,1,.5}
+		else
+			color={1,0,.5}
+		end
+		if icon then
+			announceMessages:AddMessage(msg .. ": " .. effect .. " \124T"..icon..":"..cfg.iconsize..":"..cfg.iconsize..":0:0:64:64:5:59:5:59\124t",unpack(color))
+		else
+			announceMessages:AddMessage(msg .. ": " .. effect ,unpack(color))
+		end
+	end
+end
+
+announce:RegisterEvent('COMBAT_LOG_EVENT_UNFILTERED')
+announce:SetScript('OnEvent', OnEvent)
+
+-----------------------------------------------
+-- enemy drinking(by Duffed)
+-----------------------------------------------
+local drinking_announce = CreateFrame("Frame")
+drinking_announce:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
+drinking_announce:SetScript("OnEvent", function(self, event, ...)
+	if not (event == "UNIT_SPELLCAST_SUCCEEDED" and GetZonePVPInfo() == "arena") then return end
+
+	local unit, spellName, spellrank, spelline, spellID = ...
+	if UnitIsEnemy("player", unit) and (spellID == 80167 or spellID == 94468 or spellID == 43183 or spellID == 57073 or spellName == "Drinking") then
+		if GetRealNumRaidMembers() > 0 then
+			SendChatMessage(UnitName(unit)..L["正在吃喝."], "RAID")
+		elseif GetRealNumPartyMembers() > 0 and not UnitInRaid("player") then
+			SendChatMessage(UnitName(unit)..L["正在吃喝."], "PARTY")
+		else
+			SendChatMessage(UnitName(unit)..L["正在吃喝."], "SAY")
+		end
+	end
+end)
+
+-------------------------------------------------------------------------------------
+-- Credit Alleykat 
+-- Entering combat and allertrun function (can be used in anther ways)
+------------------------------------------------------------------------------------
+local speed = .057799924 -- how fast the text appears
+cfg.fontflag = "OUTLINE" -- for pixelcfg.font stick to this else OUTLINE or THINOUTLINE
+cfg.fontsize = 24 -- cfg.font size
+ 
 local GetNextChar = function(word,num)
 	local c = word:byte(num)
 	local shift
@@ -17,35 +115,25 @@ local GetNextChar = function(word,num)
 		end
 	return word:sub(num,num+shift-1),(num+shift)
 end
-
+ 
 local updaterun = CreateFrame("Frame")
-
+ 
 local flowingframe = CreateFrame("Frame",nil,UIParent)
-	flowingframe:SetFrameStrata("HIGH")
-	flowingframe:SetPoint("CENTER",UIParent,0,110)
-	flowingframe:SetHeight(64)
-	flowingframe:SetScript("OnUpdate", FadingFrame_OnUpdate)
-	flowingframe:Hide()
-	flowingframe.fadeInTime = 0
-	flowingframe.holdTime = 1
-	flowingframe.fadeOutTime = .3
-	
+flowingframe:SetFrameStrata("HIGH")
+flowingframe:SetPoint("CENTER",UIParent,0, 50) -- where we want the textframe
+flowingframe:SetHeight(64)
+ 
 local flowingtext = flowingframe:CreateFontString(nil,"OVERLAY")
-	flowingtext:SetPoint("Left")
-	flowingtext:SetFont("Fonts\\ZYKai_T.TTF",24,"OUTLINE")
-	flowingtext:SetShadowOffset(0,0)
-	flowingtext:SetJustifyH("LEFT")
-	
+flowingtext:SetFont(cfg.font,cfg.fontsize, cfg.fontflag)
+flowingtext:SetShadowOffset(1.5,-1.5)
+ 
 local rightchar = flowingframe:CreateFontString(nil,"OVERLAY")
-	rightchar:SetPoint("LEFT",flowingtext,"RIGHT")
-	rightchar:SetFont("Fonts\\ZYKai_T.TTF",60,"OUTLINE")
-	rightchar:SetShadowOffset(0,0)
-	rightchar:SetJustifyH("LEFT")
-
-local count,len,step,word,stringE,a
-
-local speed = .03333
-
+rightchar:SetFont(cfg.font,60, cfg.fontflag)
+rightchar:SetShadowOffset(1.5,-1.5)
+rightchar:SetJustifyH("LEFT") -- left or right
+ 
+local count,len,step,word,stringE,a,backstep
+ 
 local nextstep = function()
 	a,step = GetNextChar (word,step)
 	flowingtext:SetText(stringE)
@@ -53,115 +141,153 @@ local nextstep = function()
 	a = string.upper(a)
 	rightchar:SetText(a)
 end
-
+ 
+local backrun = CreateFrame("Frame")
+backrun:Hide()
+ 
 local updatestring = function(self,t)
 	count = count - t
 		if count < 0 then
-			if step > len then 
+			count = speed
+			if step > len then
 				self:Hide()
 				flowingtext:SetText(stringE)
-				FadingFrame_Show(flowingframe)
-				rightchar:SetText("")
-				word = ""
-			else 
+				rightchar:SetText()
+				flowingtext:ClearAllPoints()
+				flowingtext:SetPoint("RIGHT")
+				flowingtext:SetJustifyH("RIGHT")
+				rightchar:ClearAllPoints()
+				rightchar:SetPoint("RIGHT",flowingtext,"LEFT")
+				rightchar:SetJustifyH("RIGHT")
+				self:Hide()
+				count = 1.456789
+				backrun:Show()
+			else
 				nextstep()
-				FadingFrame_Show(flowingframe)
-				count = speed
 			end
 		end
 end
-
+ 
 updaterun:SetScript("OnUpdate",updatestring)
 updaterun:Hide()
-
-local EuiAlertRun = function(f,r,g,b)
+ 
+local backstepf = function()
+	local a = backstep
+	local firstchar
+		local texttemp = ""
+		local flagon = true
+		while a <= len do
+			local u
+			u,a = GetNextChar(word,a)
+			if flagon == true then
+				backstep = a
+				flagon = false
+				firstchar = u
+			else
+				texttemp = texttemp..u
+			end
+		end
+	flowingtext:SetText(texttemp)
+	firstchar = string.upper(firstchar)
+	rightchar:SetText(firstchar)
+end
+ 
+local rollback = function(self,t)
+	count = count - t
+		if count < 0 then
+			count = speed
+			if backstep > len then
+				self:Hide()
+				flowingtext:SetText()
+				rightchar:SetText()
+			else
+				backstepf()
+			end
+		end
+end
+ 
+backrun:SetScript("OnUpdate",rollback)
+ 
+local allertrun = function(f,r,g,b)
+	if f == "斩杀！！" then flowingframe:SetScale(1.8) else flowingframe:SetScale(1) end
 	flowingframe:Hide()
 	updaterun:Hide()
-	
-		flowingtext:SetText(f)
-		local l = flowingtext:GetWidth()
-		
+	backrun:Hide()
+ 
+	flowingtext:SetText(f)
+	local l = flowingtext:GetWidth()
+ 
 	local color1 = r or 1
 	local color2 = g or 1
 	local color3 = b or 1
-	
-	flowingtext:SetTextColor(color1*.95,color2*.95,color3*.95)
+ 
+	flowingtext:SetTextColor(color1*.95,color2*.95,color3*.95) -- color in RGB(red green blue)(alpha)
 	rightchar:SetTextColor(color1,color2,color3)
-	
+ 
 	word = f
 	len = f:len()
-	step = 1
+	step,backstep = 1,1
 	count = speed
 	stringE = ""
 	a = ""
-	
-		flowingtext:SetText("")
-		flowingframe:SetWidth(l)
-		
+ 
+	flowingtext:SetText("")
+	flowingframe:SetWidth(l)
+	flowingtext:ClearAllPoints()
+	flowingtext:SetPoint("LEFT")
+	flowingtext:SetJustifyH("LEFT")
+	rightchar:ClearAllPoints()
+	rightchar:SetPoint("LEFT",flowingtext,"RIGHT")
+	rightchar:SetJustifyH("LEFT")
+ 
 	rightchar:SetText("")
-	FadingFrame_Show(flowingframe)
 	updaterun:Show()
+	flowingframe:Show()
 end
+ 
+SlashCmdList.ALLEYRUN = function(lol) allertrun(lol) end
+SLASH_ALLEYRUN1 = "/arn" -- /command to test the text
 
-local CombatNotification = CreateFrame ("Frame")
-local L = {}
-if(GetLocale()=="zhCN") then
-	L.INFO_WOWTIME_TIP4 = "进入战斗状态"
-	L.INFO_WOWTIME_TIP5 = "离开战斗状态"
-elseif (GetLocale()=="zhTW") then
-	L.INFO_WOWTIME_TIP4 = "進入戰鬥狀態"
-	L.INFO_WOWTIME_TIP5 = "離開戰鬥狀態"
-elseif (GetLocale()=="enUS") then
-	L.INFO_WOWTIME_TIP4 = "ENTERING COMBAT"
-	L.INFO_WOWTIME_TIP5 = "LEAVING COMBAT"
+--CombatText:UnregisterEvent("PLAYER_REGEN_ENABLED")
+--CombatText:UnregisterEvent("PLAYER_REGEN_DISABLED")
+
+SetCVar("fctCombatState", "1")
+local a = CreateFrame ("Frame")
+a:RegisterEvent("PLAYER_REGEN_ENABLED")
+a:RegisterEvent("PLAYER_REGEN_DISABLED")
+a:RegisterEvent("PLAYER_ENTERING_WORLD")
+if cfg.enableexecute then
+	a:RegisterEvent("UNIT_HEALTH")
+	a:RegisterEvent("PLAYER_TARGET_CHANGED")
+	a:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 end
-
-if combatnoti == true then
-	CombatNotification:RegisterEvent("PLAYER_REGEN_ENABLED")
-	CombatNotification:RegisterEvent("PLAYER_REGEN_DISABLED")
-	CombatNotification:SetScript("OnEvent", function (self,event)
-		if (UnitIsDead("player")) then return end
-		if event == "PLAYER_REGEN_ENABLED" then
-			EuiAlertRun(L.INFO_WOWTIME_TIP5,0.1,1,0.1)
-		else
-			EuiAlertRun(L.INFO_WOWTIME_TIP4,1,0.1,0.1)
-		end	
-	end)
-end
-
-if wgtimenoti == true then
-
-	local int = 1
-
-	local clocks_update = function(self,t)
-		int = int - t
-		if int > 0 then return end
-			
-		int = 1
-		local _,localizedName,_,canQueue,wgtime = GetWorldPVPAreaInfo(2)
-		if(GetLocale()=="zhCN") then
-			L.INFO_WOWTIME_TIP1 = localizedName.. "即将在1分钟内开始"
-			L.INFO_WOWTIME_TIP2 = localizedName.. "即将在5分钟内开始"
-			L.INFO_WOWTIME_TIP3 = localizedName.. "即将在15分钟内开始"
-		elseif (GetLocale()=="zhTW") then
-			L.INFO_WOWTIME_TIP1 = localizedName.. "即將在1分鐘內開始"
-			L.INFO_WOWTIME_TIP2 = localizedName.. "即將在5分鐘內開始"
-			L.INFO_WOWTIME_TIP3 = localizedName.. "即將在15分鐘內開始"
-		elseif (GetLocale()=="enUS") then
-			L.INFO_WOWTIME_TIP1 = localizedName.. "will start within 1 minute"
-			L.INFO_WOWTIME_TIP2 = localizedName.. "will start within 5 minute"
-			L.INFO_WOWTIME_TIP3 = localizedName.. "will start within 15 minute"
-		end		
-		if canQueue == false then
-			if wgtime == 60 then 
-				EuiAlertRun (L.INFO_WOWTIME_TIP1)
-			elseif wgtime == 300 then 
-				EuiAlertRun (L.INFO_WOWTIME_TIP2)
-			elseif wgtime == 900 then 
-				EuiAlertRun (L.INFO_WOWTIME_TIP3)
+a:SetScript("OnEvent", function (self,event)
+	if (UnitIsDead("player")) then return end
+	if event == "PLAYER_REGEN_ENABLED" and(COMBAT_TEXT_SHOW_COMBAT_STATE=="1") then
+		-- allertrun("LEAVING COMBAT",0.1,1,0.1)
+		allertrun(LEAVING_COMBAT.." !",0.1,1,0.1)
+	elseif event == "PLAYER_REGEN_DISABLED" and(COMBAT_TEXT_SHOW_COMBAT_STATE=="1") then
+		-- allertrun("ENTERING COMBAT",1,0.1,0.1)
+		allertrun(ENTERING_COMBAT.." !",1,0.1,0.1)
+	elseif event == "PLAYER_TARGET_CHANGED" then
+		flag = 0
+	elseif event == "UNIT_HEALTH" then
+		if ExecuteThreshold and ((UnitName("target") and UnitCanAttack("player", "target") and not UnitIsDead("target") and ( UnitHealth("target")/UnitHealthMax("target") < ExecuteThreshold ) and flag == 0 )) then
+			if ((cfg.onlyshowboss and UnitLevel("target")==-1) or ( not cfg.onlyshowboss)) then 
+				allertrun("斩杀！！",1,0.82,0)
 			end
+			flag = 1
 		end
+	elseif event == "PLAYER_ENTERING_WORLD" then
+		ExecuteThreshold = ClassThreshold[select(2, UnitClass("player"))][GetPrimaryTalentTree()]
+		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+	elseif event == "ACTIVE_TALENT_GROUP_CHANGED" then
+		ExecuteThreshold = ClassThreshold[select(2, UnitClass("player"))][GetPrimaryTalentTree()]
 	end
+end)
 
-	CombatNotification:SetScript("OnUpdate",clocks_update)
-end
+local tradeSkillAnnouce = CreateFrame("Frame")
+tradeSkillAnnouce:RegisterEvent("CHAT_MSG_SKILL")
+tradeSkillAnnouce:SetScript("OnEvent", function(self, event, message)
+	UIErrorsFrame:AddMessage(message, ChatTypeInfo["SKILL"].r, ChatTypeInfo["SKILL"].g, ChatTypeInfo["SKILL"].b)
+end)

@@ -1,7 +1,7 @@
 ﻿local SCREENSHOT_QUALITY = 8
 local ainvenabled = false
 local autorollgreens = false
-local AutoRepair = true
+--local AutoRepair = false
 local SellGreyCrap = true 
 local autoUIscale = false
 local HideErrors = false
@@ -339,7 +339,7 @@ SetCVar("cameraSmoothStyle", 0)
 SetCVar("chatStyle", "classic")
 
 ---------------- > AutoRepair and sell grey junk
-local g = CreateFrame("Frame")
+--[[local g = CreateFrame("Frame")
 g:RegisterEvent("MERCHANT_SHOW")
 g:SetScript("OnEvent", function()    
 	if(AutoRepair==true and CanMerchantRepair()) then
@@ -377,7 +377,7 @@ g:SetScript("OnEvent", function()
         end
     end
 end)
-
+]]
 ---------------- > Moving TicketStatusFrame
 TicketStatusFrame:ClearAllPoints()
 TicketStatusFrame:SetPoint("TOPLEFT",UIParent,"TOPLEFT")

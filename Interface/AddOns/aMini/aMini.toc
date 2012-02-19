@@ -8,6 +8,7 @@
 Achievement.lua
 Align.lua
 AlreadyKnown.lua
+AutoRepair.lua
 AuctionPlus.lua
 BlizzBugsSuck.lua
 castby.lua
