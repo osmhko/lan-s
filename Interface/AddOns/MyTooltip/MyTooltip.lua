@@ -2,6 +2,7 @@
 --Config
 -------------------------------------------------------------------------------------
 local config = {
+	hideincombat = true,	--战斗中隐藏
 	cursor = false,	--跟随鼠标
 	colorStatusBar = true,	--血条职业染色
 	["Debug"] = false,	--显示物品ID,法术ID
@@ -150,7 +151,7 @@ end
 			if level == "??" or level == -1 then
 				textLevel = "|cffff0000??|r"
 			end
-			
+
 			if UnitIsPlayer(unit) then
 				local unitRace = UnitRace(unit)
 				local _, unitClass = UnitClass(unit)
@@ -159,14 +160,14 @@ end
 				else
 					unitClass = LOCALIZED_CLASS_NAMES_FEMALE[unitClass]
 				end
-				
-				
+
+
 				if UnitIsAFK(unit) then
 					self:AppendText((" |cff00cc00%s|r"):format(CHAT_FLAG_AFK))
 				elseif UnitIsDND(unit) then 
 					self:AppendText((" |cff00cc00%s|r"):format(CHAT_FLAG_DND))
 				end
-				
+
 				for i = 2, GameTooltip:NumLines() do
 					if _G["GameTooltipTextLeft"..i]:GetText():find(unitRace) then
 						pattern = pattern.." %s %s, %s"
@@ -179,7 +180,7 @@ end
 					local text = GameTooltipTextLeft1:GetText()
 					GameTooltipTextLeft1:SetText(("%s %s"):format(ICON_LIST[ricon].."18|t", text))
 				end
-				
+
                 local title = UnitPVPName(unit)
                 if title then
                     local text = GameTooltipTextLeft1:GetText()
@@ -207,7 +208,7 @@ end
 					GameTooltipTextLeft2:SetTextColor(FACTION_BAR_COLORS[reaction].r, FACTION_BAR_COLORS[reaction].g, FACTION_BAR_COLORS[reaction].b)
 				end
 				if level ~= 0 then
-					
+
 						local class = UnitClassification(unit)
 						if class == "worldboss" then
 							textLevel = ("|cffff0000%s|r"):format(worldBoss)
@@ -230,7 +231,7 @@ end
 								textLevel = ("%s%d|r %s"):format(GetHexColor(color), level, rare)
 							end
 						end
-					
+
 					local creatureType = UnitCreatureType(unit)
 					for i = 2, GameTooltip:NumLines() do
 						if _G["GameTooltipTextLeft"..i]:GetText():find(LEVEL) then
@@ -260,7 +261,7 @@ end
 				local r, g, b = GameTooltip_UnitColor(unit)
 				GameTooltipStatusBar:SetStatusBarColor(r, g, b)
 			end
-			
+
 			if (UnitIsDead(unit) or UnitIsGhost(unit)) then
 				GameTooltipStatusBar:Hide()
 			else
@@ -320,7 +321,7 @@ end
 			self.text:SetText(hp)
 		end
 	end)
-	
+
 	local Tooltips = {GameTooltip, ItemRefTooltip, ShoppingTooltip1, ShoppingTooltip2, ShoppingTooltip3, WorldMapTooltip}
 	for i, v in ipairs(Tooltips) do
 		v:SetBackdrop(nil)
@@ -330,8 +331,8 @@ end
 		v.bg:SetBackdrop(backdrop)
 		v.bg:SetBackdropColor(unpack(bdcRGB))
 		v.bg:SetBackdropBorderColor(unpack(bdbcRGB))
-		
-		
+
+
 		for i = 1, select('#', v:GetRegions()) do
 		  local obj = select(i, v:GetRegions())
 		  if (obj and obj:GetObjectType() == 'FontString') then
@@ -339,7 +340,7 @@ end
 				obj:GetParent():SetScale(1)
 		  end
 		end
-		
+
 		if config["Debug"] == true then
 			hooksecurefunc(v,"SetUnitAura", function(self, unit, index, filter)
 				local _, _, _, _, _, _, _, _, _, _, spell = UnitAura(unit, index, filter)
@@ -349,21 +350,22 @@ end
 				end
 			end)
 		end
-		
+
 		v:SetScript("OnShow", function(self)
+			if InCombatLockdown() and config.hideincombat then self:Hide() end
 			local name, item = self:GetItem()
 			if item then
 				local _, _, Color, Ltype, itemID, Enchant, Gem1, Gem2, Gem3, Gem4, Suffix, Unique, LinkLvl, Name = item:find( "|?c?f?f?(%x*)|?H?([^:]*):?(%d+):?(%d*):?(%d*):?(%d*):?(%d*):?(%d*):?(%-?%d*):?(%-?%d*):?(%d*)|?h?%[?([^%[%]]*)%]?|?h?|?r?")
 				self.bg:SetBackdrop(backdroppx)
 				self.bg:SetBackdropColor(unpack(bdcRGB))
 				--self:AddDoubleLine("Item ID", itemID)
-			
+
 				local quality = select(3, GetItemInfo(item))
 				if(quality) then
 					local r, g, b = GetItemQualityColor(quality)
 					self.bg:SetBackdropBorderColor(r, g, b)
 				end
-				
+
 				local regions = {self:GetRegions()}
 				local itemLink = select(2, GetItemInfo(item))
 				if self.NumLines then
@@ -401,7 +403,7 @@ end
 	anchorframe:SetSize(150, 20)
 	anchorframe:SetPoint("RIGHT",UIParent,-400,0)
 	if IsAddOnLoaded("!MyGUI") and UIMovableFrames then tinsert(UIMovableFrames, anchorframe) end
-	
+
 	hooksecurefunc("GameTooltip_SetDefaultAnchor", function(tooltip, parent)
 		local frame = GetMouseFocus()
 		if config.cursor and frame == WorldFrame then
@@ -425,7 +427,7 @@ end
 		elseif( type == "achievement" ) then
 			icon = select(10, GetAchievementInfo(id))
 		end	
-		
+
 		if( not icon ) then
 			ItemRefTooltipTexture10:Hide()
 
@@ -444,21 +446,21 @@ end
 		ItemRefTooltipTexture10:SetWidth(20)
 		ItemRefTooltipTexture10:Show()
 		ItemRefTooltipTexture10:SetTexCoord(.1,.9,.1,.9)
-		
+
 		ItemRefTooltipTextLeft1:ClearAllPoints()
 		ItemRefTooltipTextLeft1:SetPoint("TOPLEFT", ItemRefTooltipTexture10, "TOPLEFT", 24, -2)
 
 		ItemRefTooltipTextLeft2:ClearAllPoints()
 		ItemRefTooltipTextLeft2:SetPoint("TOPLEFT", ItemRefTooltip, "TOPLEFT", 8, -28)
-		
+
 		local textRight = ItemRefTooltipTextLeft1:GetRight()
 		local closeLeft = ItemRefCloseButton:GetLeft()
-		
+
 		if( closeLeft <= textRight ) then
 			ItemRefTooltip:SetWidth(ItemRefTooltip:GetWidth() + (textRight - closeLeft))
 		end
 	end)
-	
+
 local function IRTsetfont()
 for index=2, ItemRefTooltip:NumLines() do
 _G[ItemRefTooltip:GetName()..'TextLeft'..index]:SetFont(font,14,"THINOUTLINE")
