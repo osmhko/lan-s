@@ -79,6 +79,7 @@ end
 
 function watcherPrototype:CreateButton(mode)
 	local button=CreateFrame("Frame", nil, self.parent)
+	button:SetParent(UIParent)
 	CreateSh(button,"Background")
 	button:SetSize(self.size, self.size)
 	self.parent:SetSize(self.size, self.size)

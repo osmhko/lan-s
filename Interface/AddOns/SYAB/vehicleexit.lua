@@ -23,8 +23,8 @@ bar:SetScale(C["actionbar"].barscale*1.3)
 
 
 local veb = CreateFrame("BUTTON", nil, bar, "SecureActionButtonTemplate");
-veb:Point("TOPLEFT", -3, 2)
-veb:Point("BOTTOMRIGHT", 3, -2)
+veb:Point("TOPLEFT", -0, 0)
+veb:Point("BOTTOMRIGHT", 0, -0)
 veb:CreateShadow("Background", -3)
 veb:RegisterForClicks("AnyUp")
 veb:SetNormalTexture("Interface\\Vehicles\\UI-Vehicles-Button-Exit-Up")

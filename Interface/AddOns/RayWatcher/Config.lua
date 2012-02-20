@@ -13,7 +13,7 @@
 --local R, C = unpack(RayUI)
 local _, ns = ...
 
-ns.font = "FONTS\\FRIZQT__.ttf"
+ns.font = "Interface\\Addons\\RayWatcher\\Media\\pxFont.ttf"
 ns.fontsize = 12
 ns.fontflag = "OUTLINE"
 

@@ -209,7 +209,7 @@ end
 backrun:SetScript("OnUpdate",rollback)
  
 local allertrun = function(f,r,g,b)
-	if f == "斩杀！！" then flowingframe:SetScale(1.8) else flowingframe:SetScale(1) end
+	if f == "斩杀!" then flowingframe:SetScale(1.8) else flowingframe:SetScale(1) end
 	flowingframe:Hide()
 	updaterun:Hide()
 	backrun:Hide()
