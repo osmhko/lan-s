@@ -9,6 +9,8 @@ Qulight["media"] = {
 
 Qulight["unitframes"] = {
 	["enable"] = true,																	-- enable/disable action bars
+	["SetScale"] = 1,	
+	["fade"] = false,
 	["HealthcolorClass"] = false,														-- health color = class color
 	["bigcastbar"] = false,
 	["Powercolor"] = true,																-- power color = class color
@@ -40,6 +42,10 @@ Qulight["unitframes"] = {
 	["Anchorfocuscastbar"] = {"CENTER", 322, 800}, 
 	["Anchortank"] = {"BOTTOMLEFT", 310, 470},
 	["Anchorboss"] = {"BOTTOMRIGHT", -300, 550},
+----------------------------------------------------------
+	["AnchorHoly"] =  {"TOP", UIParent, "BOTTOM", 0, 398},
+	["HolyWidth"] = 210,
+	["HolyHeight"] = 6,
 }
 
 Qulight["raidframes"] = {

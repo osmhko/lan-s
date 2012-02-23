@@ -32,8 +32,8 @@ local Enable = function(self)
 
         self.AuraStatusBR = self.Health:CreateFontString(nil, "OVERLAY")
         self.AuraStatusBR:ClearAllPoints()
-        self.AuraStatusBR:SetPoint("BOTTOMRIGHT", self.Health, 6, -2)
-        self.AuraStatusBR:SetFont(symbols, Qulight["raidframes"].symbolsize, "THINOUTLINE")
+        self.AuraStatusBR:SetPoint("BOTTOMRIGHT", self.Health, 3, -3)
+        self.AuraStatusBR:SetFont(Qulight["media"].pxfont, 14, "THINOUTLINE") -----
         self.AuraStatusBR.frequentUpdates = update
         self:Tag(self.AuraStatusBR, ns.classIndicators[class]["BR"])
 

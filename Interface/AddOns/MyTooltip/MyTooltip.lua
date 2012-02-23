@@ -2,7 +2,7 @@
 --Config
 -------------------------------------------------------------------------------------
 local config = {
-	hideincombat = true,	--战斗中隐藏
+	hideincombat = false,	--战斗中隐藏
 	cursor = false,	--跟随鼠标
 	colorStatusBar = true,	--血条职业染色
 	["Debug"] = false,	--显示物品ID,法术ID

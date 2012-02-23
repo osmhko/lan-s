@@ -306,7 +306,7 @@ do
 			if(i <= num) then
 				self.HolyPower[i]:SetAlpha(1)
 			else
-				self.HolyPower[i]:SetAlpha(.2)
+				self.HolyPower[i]:SetAlpha(0)
 			end
 		end
 	end	
@@ -663,7 +663,7 @@ lib.gen_castbar = function(f)
 		s:SetPoint("TOP", f, "BOTTOM", -10,-5)---s:SetPoint("TOP", f, "TOP", -10,20)
 	elseif f.mystyle == "focus" then
 		s:SetHeight(15)
-		s:SetWidth(200)
+		s:SetWidth(158)
 		s:SetPoint("TOP", f, "TOP", 10,20)
     end
 	if f.mystyle == "boss"  then
@@ -1141,39 +1141,46 @@ end
 lib.genHolyPower = function(self)
 	if playerClass ~= "PALADIN" then return end
 	local bars = CreateFrame("Frame", nil, self)
-	bars:SetPoint("TOPLEFT", self, "TOPLEFT", 4,-3)
-	bars:SetWidth(self:GetWidth()-180)
-	bars:SetHeight(6)
+	bars:SetPoint(unpack(Qulight["unitframes"].AnchorHoly))
+	bars:SetWidth(Qulight["unitframes"].HolyWidth)
+--	bars:SetWidth(self:GetWidth()-180)
+	bars:SetHeight(Qulight["unitframes"].HolyHeight)
 	bars:SetFrameLevel(6)
 
-	for i = 1, 3 do					
+	for i = 1, 3 do
 		bars[i]=CreateFrame("StatusBar", nil, bars)
-		bars[i]:SetHeight(bars:GetHeight())					
+		bars[i]:SetHeight(bars:GetHeight())
 		bars[i]:SetStatusBarTexture(statusbar_texture)
 		bars[i]:GetStatusBarTexture():SetHorizTile(false)
 
-		bars[i].bg = bars[i]:CreateTexture(nil, 'BORDER')
-		bars[i]:SetStatusBarColor(228/255,225/255,16/255)
-		bars[i].bg:SetTexture(228/255,225/255,16/255)
-					
-		if i == 1 then
-			bars[i]:SetPoint("LEFT", bars)
-		else
-			bars[i]:SetPoint("LEFT", bars[i-1], "RIGHT", 1, 0)
-		end
+	--	bars[i].bg = bars[i]:CreateTexture(nil, 'BORDER')
+		bars[i]:SetStatusBarColor(1,.8,0)
+	--	bars[i].bg:SetTexture(0,0,0)--(228/255,225/255,16/255)
+		bars[i]:SetPoint("CENTER", bars, "LEFT", (2*i-1)/6*bars:GetWidth(), 0)
+	--	if i == 1 then
+	--		bars[i]:SetPoint("LEFT", bars)
+	--	else
+	--		bars[i]:SetPoint("LEFT", bars[i-1], "RIGHT", 1, 0)
+	--	end
+		bars[i].bg = CreateFrame("Frame", nil, bars[i])
+		CreateShadowclassbar(bars[i].bg)
+		bars[i].bg:SetBackdropBorderColor(.2,.2,.2,1)
+		bars[i].bg:SetPoint("TOPLEFT", -2, 2)
+		bars[i].bg:SetPoint("BOTTOMRIGHT", 2, -2)
+		bars[i].bg:SetFrameLevel(bars[i]:GetFrameLevel() - 1)
 		
-		bars[i].bg:SetAllPoints(bars[i])
-		bars[i]:SetWidth((bars:GetWidth() - 2)/3)
-		bars[i].bg:SetTexture(statusbar_texture)					
-		bars[i].bg:SetAlpha(.15)
+	--	bars[i].bg:SetAllPoints(bars[i])
+		bars[i]:SetWidth(.92*(bars:GetWidth() - 2)/3)
+	--	bars[i].bg:SetTexture(statusbar_texture)					
+	--	bars[i].bg:SetAlpha(.15)
 	end
 				
-	bars.backdrop = CreateFrame("Frame", nil, bars)
-	CreateShadowclassbar(bars.backdrop)
-	bars.backdrop:SetBackdropBorderColor(.2,.2,.2,1)
-	bars.backdrop:SetPoint("TOPLEFT", -2, 2)
-	bars.backdrop:SetPoint("BOTTOMRIGHT", 2, -2)
-	bars.backdrop:SetFrameLevel(bars:GetFrameLevel() - 1)
+--	bars.backdrop = CreateFrame("Frame", nil, bars)
+--	CreateShadowclassbar(bars.backdrop)
+--	bars.backdrop:SetBackdropBorderColor(.2,.2,.2,1)
+--	bars.backdrop:SetPoint("TOPLEFT", -2, 2)
+--	bars.backdrop:SetPoint("BOTTOMRIGHT", 2, -2)
+--	bars.backdrop:SetFrameLevel(bars:GetFrameLevel() - 1)
 	bars.Override = UpdateHoly
 	self.HolyPower = bars	
 end

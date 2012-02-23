@@ -1,7 +1,7 @@
 local cfg = {}
-cfg.onlyshowboss = false
 cfg.enableexecute = true
-cfg.font = "Fonts\\ZYKai_T.ttf"
+cfg.onlyshowboss = false
+cfg.font = "Fonts\\Zykai_T.ttf"
 cfg.fontflag = "OUTLINE" -- for pixelcfg.font stick to this else OUTLINE or THINOUTLINE
 cfg.fontsize = 24 -- cfg.font size
 cfg.iconsize = 24
@@ -12,7 +12,7 @@ local COMBATLOG_OBJECT_AFFILIATION_MINE = COMBATLOG_OBJECT_AFFILIATION_MINE
 
 local ClassThreshold = {
 	["WARRIOR"] = { 0.2, 0.2, 0},
-	["DRUID"] = { 0, 0.25, 0.25},
+	["DRUID"] = { 0, 0.25, 0},
 	["PALADIN"] = { 0, 0, 0.2},
 	["PRIEST"] = { 0, 0, 0.25},
 	["DEATHKNIGHT"] = { 0, 0.35, 0},
@@ -22,6 +22,15 @@ local ClassThreshold = {
 	["MAGE"] = { 0, 0.35, 0},
 	["SHAMAN"] = { 0, 0, 0},	
 }
+local ExecuteText = {
+	["WARRIOR"] = GetSpellInfo(5308),--"斩杀",
+	["PALADIN"] = GetSpellInfo(24275),--"愤怒之锤",
+	["PRIEST"] = GetSpellInfo(32379),--"暗言术：灭",
+--	["WARLOCK"] = GetSpellInfo(1120),--"吸取灵魂",
+	["ROGUE"] = GetSpellInfo(53),--"背刺",
+	["HUNTER"] = GetSpellInfo(53351),--"杀戮射击",
+}
+
 local ExecuteThreshold, flag = ClassThreshold[select(2, UnitClass("player"))][GetPrimaryTalentTree()], 1
  
 -- Frame function
@@ -209,7 +218,7 @@ end
 backrun:SetScript("OnUpdate",rollback)
  
 local allertrun = function(f,r,g,b)
-	if f == "斩杀!" then flowingframe:SetScale(1.8) else flowingframe:SetScale(1) end
+	if f == "斩杀！！" then flowingframe:SetScale(1.8);speed = 0 else flowingframe:SetScale(1);speed = .057799924 end
 	flowingframe:Hide()
 	updaterun:Hide()
 	backrun:Hide()
@@ -262,6 +271,7 @@ if cfg.enableexecute then
 	a:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 end
 a:SetScript("OnEvent", function (self,event)
+	local pclass = select(2, UnitClass("player"))
 	if (UnitIsDead("player")) then return end
 	if event == "PLAYER_REGEN_ENABLED" and(COMBAT_TEXT_SHOW_COMBAT_STATE=="1") then
 		-- allertrun("LEAVING COMBAT",0.1,1,0.1)
@@ -273,16 +283,17 @@ a:SetScript("OnEvent", function (self,event)
 		flag = 0
 	elseif event == "UNIT_HEALTH" then
 		if ExecuteThreshold and ((UnitName("target") and UnitCanAttack("player", "target") and not UnitIsDead("target") and ( UnitHealth("target")/UnitHealthMax("target") < ExecuteThreshold ) and flag == 0 )) then
-			if ((cfg.onlyshowboss and UnitLevel("target")==-1) or ( not cfg.onlyshowboss)) then 
-				allertrun("斩杀！！",1,0.82,0)
+			if ((cfg.onlyshowboss and UnitLevel("target")==-1) or ( not cfg.onlyshowboss)) then
+				local text = ExecuteText[pclass] or "斩杀阶段"
+				allertrun(text.."!",1,0.82,0)
 			end
 			flag = 1
 		end
 	elseif event == "PLAYER_ENTERING_WORLD" then
-		ExecuteThreshold = ClassThreshold[select(2, UnitClass("player"))][GetPrimaryTalentTree()]
+		ExecuteThreshold = ClassThreshold[pclass][GetPrimaryTalentTree()]
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	elseif event == "ACTIVE_TALENT_GROUP_CHANGED" then
-		ExecuteThreshold = ClassThreshold[select(2, UnitClass("player"))][GetPrimaryTalentTree()]
+		ExecuteThreshold = ClassThreshold[pclass][GetPrimaryTalentTree()]
 	end
 end)
 

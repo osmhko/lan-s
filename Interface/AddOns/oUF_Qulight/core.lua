@@ -5,6 +5,7 @@ oUF.colors.smooth = {.7, .15, .15, .85, .8, .45, .15, .15, .15}
 -- STYLE FUNCTIONS
 -----------------------------
 local BarFader = function(self)
+     if not Qulight["unitframes"].fade then return end
 	self.BarFade = true
 	self.BarFaderMinAlpha = "0"
 end
@@ -13,6 +14,7 @@ local function CreatePlayerStyle(self, unit, isSingle)
 	lib.init(self)
 	BarFader(self)
 	self.scale = scale
+	self:SetScale(Qulight["unitframes"].SetScale)
 	self:SetSize(220,38)
 	lib.gen_hpbar(self)
 	lib.gen_hpstrings(self)
@@ -59,6 +61,7 @@ local function CreateTargetStyle(self, unit, isSingle)
 	lib.init(self)
 --	BarFader(self)
 	self.scale = scale
+	self:SetScale(Qulight["unitframes"].SetScale)
 	self:SetSize(220,38)
 	lib.gen_hpbar(self)
 	lib.gen_hpstrings(self)
@@ -94,6 +97,7 @@ local function CreateFocusStyle(self, unit, isSingle)
 	self.mystyle = "focus"
 	lib.init(self)
 	self.scale = scale
+	self:SetScale(Qulight["unitframes"].SetScale)
 	self:SetSize(180,34)
 	lib.gen_hpbar(self)
 	lib.gen_hpstrings(self)
@@ -123,6 +127,7 @@ local function CreateToTStyle(self, unit, isSingle)
 	self.mystyle = "tot"
 	lib.init(self)
 	self.scale = scale
+	self:SetScale(Qulight["unitframes"].SetScale)
 	self:SetSize(100,28)
 	lib.gen_hpbar(self)
 	lib.gen_hpstrings(self)
@@ -145,6 +150,7 @@ local function CreateFocusTargetStyle(self, unit, isSingle)
 	self.mystyle = "focustarget"
 	lib.init(self)
 	self.scale = scale
+	self:SetScale(Qulight["unitframes"].SetScale)
 	self:SetSize(100,28)
 	lib.gen_hpbar(self)
 	lib.gen_hpstrings(self)
@@ -167,6 +173,7 @@ local function CreatePetStyle(self, unit, isSingle)
 	self.mystyle = "pet"
 	lib.init(self)
 	self.scale = scale
+	self:SetScale(Qulight["unitframes"].SetScale)
 	self:SetSize(100,28)
 	lib.gen_hpbar(self)
 	lib.gen_hpstrings(self)
@@ -187,6 +194,7 @@ local function CreatePetStyle(self, unit, isSingle)
 end
 local function CreateBossStyle(self, unit, isSingle)
 	self.mystyle = "boss"
+	self:SetScale(Qulight["unitframes"].SetScale)
 	self:SetSize(150,28)
 	lib.gen_hpbar(self)
 	lib.gen_hpstrings(self)
@@ -209,6 +217,7 @@ local function CreateBossStyle(self, unit, isSingle)
 end
 local function CreateMTStyle(self)
 	self.mystyle = "oUF_MT"
+	self:SetScale(Qulight["unitframes"].SetScale)
 	self:SetSize(100,22)
 	lib.gen_hpbar(self)
 	lib.gen_hpstrings(self)
@@ -222,6 +231,7 @@ local function CreateMTStyle(self)
 end
 local function CreateArenaStyle(self, unit, isSingle)
 	self.mystyle = "oUF_Arena"
+	self:SetScale(Qulight["unitframes"].SetScale)
 	self:SetSize(150,28)
 	lib.gen_hpbar(self)
 	lib.gen_hpstrings(self)

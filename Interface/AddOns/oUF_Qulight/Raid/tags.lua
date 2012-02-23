@@ -237,6 +237,23 @@ oUF.Tags['freebgrid:beacon'] = function(u)
 end
 oUF.TagEvents['freebgrid:beacon'] = "UNIT_AURA"
 
+oUF.Tags['freebgrid:beaconTime'] = function(u)	--µÀ±ê
+    local name, _,_,_,_,_, expirationTime, fromwho = UnitAura(u, GetSpellInfo(53563))
+    if not name then return end
+	 local spellTimer =math.ceil( (expirationTime-GetTime()-30)/60)
+	 if spellTimer < 0 then spellTimer = 0.1 end
+    if(fromwho == "player") then
+        if spellTimer > 1 then
+            return "|cff00FEBF"..spellTimer.."|r"
+        else
+            return "|cffFFCC00"..spellTimer.."|r"
+        end
+    else
+        return "|cffFFFFFF"..spellTimer.."|r"-- other pally's beacon
+    end
+end
+oUF.TagEvents['freebgrid:beaconTime'] = "UNIT_AURA"
+
 oUF.Tags['freebgrid:forbearance'] = function(u) if UnitDebuff(u, GetSpellInfo(25771)) then return "|cffFF9900"..x.."|r" end end
 oUF.TagEvents['freebgrid:forbearance'] = "UNIT_AURA"
 
@@ -286,8 +303,8 @@ ns.classIndicators={
     ["PALADIN"] = {
         ["TL"] = "[freebgrid:forbearance]",
         ["TR"] = "[freebgrid:might][freebgrid:motw]",
-        ["BL"] = "",
-        ["BR"] = "[freebgrid:beacon]",
+        ["BL"] = "[freebgrid:beacon]",
+        ["BR"] = "[freebgrid:beaconTime]",
         ["Cen"] = "",
     },
     ["WARLOCK"] = {

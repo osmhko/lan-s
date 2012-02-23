@@ -6,6 +6,41 @@ local SellGreyCrap = true
 local autoUIscale = false
 local HideErrors = false
 local autoacceptDE = false
+-----------------------------------------------聊天栏贴出来的装备鼠标放上去会显示详细信息 
+local LinkHover = {}; LinkHover.show = {
+   ["achievement"] = true,
+   ["enchant"]     = true,
+   ["glyph"]       = true,
+   ["item"]        = true,
+   ["quest"]       = true,
+   ["spell"]       = true,
+   ["talent"]      = true,
+   ["unit"]        = true,
+   }
+---------------- > Show tooltips when hovering a link in chat (credits to Adys for his LinkHover)
+function LinkHover.OnHyperlinkEnter(_this, linkData, link)
+   local t = linkData:match("^(.-):")
+   if LinkHover.show[t] then
+      ShowUIPanel(GameTooltip)
+      GameTooltip:SetOwner(_this, "ANCHOR_RIGHT")
+      GameTooltip:SetHyperlink(link)
+      GameTooltip:Show()
+   end
+end
+function LinkHover.OnHyperlinkLeave(_this, linkData, link)
+   local t = linkData:match("^(.-):")
+   if LinkHover.show[t] then
+      HideUIPanel(GameTooltip)
+   end
+end
+local function main()
+   for i = 1, NUM_CHAT_WINDOWS do
+      local frame = _G["ChatFrame"..i]
+      frame:SetScript("OnHyperlinkEnter", LinkHover.OnHyperlinkEnter)
+      frame:SetScript("OnHyperlinkLeave", LinkHover.OnHyperlinkLeave)
+   end
+end
+main()
 --------------------------------------------成就截图
 local function TakeScreen(delay, func, ...)
 local waitTable = {}

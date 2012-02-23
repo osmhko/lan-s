@@ -134,7 +134,7 @@ function watcherPrototype:CreateButton(mode)
 		button.time:SetPoint("BOTTOMRIGHT", button.statusbar, "TOPRIGHT", 0, 2)
 		button.time:SetText("60")
 		button.name = button:CreateFontString(nil, "OVERLAY")
-		button.name:SetFont(ns.font, ns.fontsize, ns.fontflag)
+		button.name:SetFont("Fonts\\ZYKai_T.ttf", ns.fontsize, ns.fontflag)
 		button.name:SetPoint("BOTTOMLEFT", button.statusbar, "TOPLEFT", 0, 2)
 		button.name:SetText("技能名称")
 		button.mode = "BAR"

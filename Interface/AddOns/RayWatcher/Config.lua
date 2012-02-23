@@ -13,7 +13,7 @@
 --local R, C = unpack(RayUI)
 local _, ns = ...
 
-ns.font = "Interface\\Addons\\RayWatcher\\Media\\pxFont.ttf"
+ns.font = "Interface\\Addons\\RayWatcher\\Media\\pxFont.ttf"   --"Fonts\\ZYKai_T.ttf"
 ns.fontsize = 12
 ns.fontflag = "OUTLINE"
 
@@ -502,14 +502,18 @@ ns.watchers ={
 
 			-- 神聖之盾
 			{ spellID = 20925, unitId = "player", caster = "player", filter = "BUFF" },
+			-- 复仇之怒
+			{ spellID = 31884, unitId = "player", caster = "player", filter = "BUFF" },
 			-- 神性祈求
 			{ spellID = 54428, unitId = "player", caster = "player", filter = "BUFF" },
 			-- 神恩術
 			{ spellID = 31842, unitId = "player", caster = "player", filter = "BUFF" },
 			-- 異端審問
 			{ spellID = 84963, unitId = "player", caster = "player", filter = "BUFF" },
-			-- 狂熱精神
+			-- 狂熱
 			{ spellID = 85696, unitId = "player", caster = "player", filter = "BUFF" },
+			-- 保护
+			{ spellID = 1022, unitId = "player", caster = "player", filter = "BUFF" },
 			-- 破曉之光
 			{ spellID = 88819, unitId = "player", caster = "player", filter = "BUFF" },
 			-- 聖光灌注
@@ -540,6 +544,7 @@ ns.watchers ={
 			
 			-- 制裁之錘
 			{ spellID = 853, unitId = "focus", caster = "all", filter = "DEBUFF" },
+			{ spellID = 20066, unitId = "focus", caster = "all", filter = "DEBUFF" },
 
 		},
 		{
