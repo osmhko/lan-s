@@ -10,7 +10,7 @@ Qulight["media"] = {
 Qulight["unitframes"] = {
 	["enable"] = true,																	-- enable/disable action bars
 	["SetScale"] = 1,	
-	["fade"] = false,
+	["fade"] = true,
 	["HealthcolorClass"] = false,														-- health color = class color
 	["bigcastbar"] = false,
 	["Powercolor"] = true,																-- power color = class color
