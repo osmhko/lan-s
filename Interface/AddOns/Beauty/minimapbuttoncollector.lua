@@ -18,11 +18,6 @@ local BlackList = {
 
 local buttons = {}
 local MBCF = CreateFrame("Frame", "MinimapButtonCollectFrame", UIParent)
-if select(3, Minimap:GetPoint()):upper():find("TOP") then
-	MBCF:SetPoint("BOTTOMLEFT", Minimap, "TOPLEFT", 0, 5)
-else
-	MBCF:SetPoint("BOTTOMLEFT", Minimap, "TOPLEFT", 0, 5)
-end
 MBCF:SetFrameStrata("BACKGROUND")
 MBCF:SetFrameLevel(1)
 --MBCF.bg = MBCF:CreateTexture(nil, "BACKGROUND")
@@ -32,12 +27,12 @@ local function PositionAndStyle()
 	--MBCF.bg:SetTexture(0, 0, 0, 1)
 	MBCF:SetAlpha(0)
 	if select(3, Minimap:GetPoint()):upper():find("TOP") then
-		MBCF:SetSize(20, 150)
-		MBCF:SetPoint("TOPLEFT", Minimap, "TOPRIGHT", 5, 2)
+		MBCF:SetSize(150, 20)
+		MBCF:SetPoint("TOPLEFT", Minimap, "BOTTOMLEFT", -2, -5)
 		--MBCF.bg:SetGradientAlpha("VERTICAL", 0, 0, 0, 0, 0, 0, 0, .6)
 		for i =1, #buttons do
 			buttons[i]:ClearAllPoints()
-			buttons[i]:SetPoint("TOP", MinimapButtonCollectFrame, "TOP", 0,  - (i - 1) * 30)
+			buttons[i]:SetPoint("LEFT", MinimapButtonCollectFrame, "LEFT", (i - 1) * 30, 0)
 			buttons[i].ClearAllPoints = B.dummy
 			buttons[i].SetPoint = B.dummy
 		end
