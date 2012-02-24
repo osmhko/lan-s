@@ -17,7 +17,7 @@ ChatFilter.lua
 CombatNotification.lua
 Focuser.lua
 idQuestAutomation.lua
-iLvLr.lua
+HideBlizzardRaidui.lua
 InspectFix.lua
 ncHoverBind.lua
 m_Settings.lua
